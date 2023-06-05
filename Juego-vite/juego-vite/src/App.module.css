@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.carta {
+
+    border: solid 1px black;
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.botones {
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
