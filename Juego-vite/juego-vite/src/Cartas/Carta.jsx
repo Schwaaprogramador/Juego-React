@@ -17,7 +17,7 @@ export  function Carta ({id, name, attackprop, health, selected }) {
       };
 
       const attackdmg = () => {
-        dispatch(attack(attackprop));
+        dispatch(attack({attackprop}));
       };
 
 

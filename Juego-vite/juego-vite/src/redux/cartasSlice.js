@@ -24,7 +24,9 @@ const initialState = {
             health: 100,
             selected: false,
           }
-    ]
+    ],
+    seleccionados: [],
+    error: '',
 }
 
 
@@ -36,28 +38,44 @@ export const cartasSlice = createSlice({
     reducers: {
     
         seleccionar: (state, action) => {
+
             const id = action.payload;
             
             for (let i = 0; i < state.cartas.length ; i++) {
 
-                if (state.cartas[i].id === id) state.cartas[i].selected = true;
-
+                if (state.cartas[i].id === id) {
+                    state.cartas[i].selected = true;
+                    state.seleccionados.push(state.cartas[i])
+                }
+                
               }
             
         },
-        attack: (state, action)=>{
 
-            const dmg = action.payload;
-            console.log('el danho' + dmg)
-            
-            for (let i = 0; i < state.cartas.length ; i++) {
+        attackSingle: (state, action)=>{
 
-                if (state.cartas[i].selected === true) state.cartas[i].health = state.cartas[i].health - dmg;
+            const { attackprop } = action.payload;
 
-              }
+            if(state.seleccionados.length > 1) {
+
+                state.error = 'Solo un objetivo';
+             }
+
+            if(state.seleccionados.length  === 1){
+
+                for (let i = 0; i < state.cartas.length ; i++) {
+                    if(state.cartas[i].selected === true) {
+                            state.cartas[i].health = state.cartas[i].health - attackprop;
+                    }  
+                  }
+            }
+                   
         }
     }
 })
+
+
+
 
 export const { seleccionar, attack } = cartasSlice.actions;
 
